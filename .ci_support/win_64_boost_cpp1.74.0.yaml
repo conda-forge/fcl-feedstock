@@ -1,5 +1,5 @@
 boost_cpp:
-- '1.72'
+- 1.74.0
 c_compiler:
 - vs2017
 channel_sources:
@@ -15,3 +15,5 @@ pin_run_as_build:
     max_pin: x.x.x
   flann:
     max_pin: x.x.x
+target_platform:
+- win-64
