@@ -1,6 +1,6 @@
 {% set name = "fcl" %}
-{% set version = "0.6.1" %}
-{% set sha256 = "c8a68de8d35a4a5cd563411e7577c0dc2c626aba1eef288cb1ca88561f8d8019" %}
+{% set version = "0.7.0" %}
+{% set sha256 = "90409e940b24045987506a6b239424a4222e2daf648c86dd146cbcb692ebdcbc" %}
 
 package:
   name: {{ name }}
@@ -13,7 +13,7 @@ source:
     - fix-win.patch
 
 build:
-  number: 3
+  number: 0
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
