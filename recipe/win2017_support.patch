@@ -1,0 +1,27 @@
+From e7a6374c1ab4491c25e128c0737fa0248d960c81 Mon Sep 17 00:00:00 2001
+From: Silvio Traversaro <silvio@traversaro.it>
+Date: Sat, 13 Nov 2021 12:43:11 +0100
+Subject: [PATCH] Add VS2017 support
+
+---
+ src/CMakeLists.txt | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 425724e7..4d5019be 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -114,6 +114,12 @@ target_include_directories(${PROJECT_NAME} INTERFACE
+   $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include>
+   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+ 
++# VS2017 support, see https://github.com/conda-forge/fcl-feedstock/pull/11#issuecomment-968054820
++if(MSVC)
++  target_compile_definitions(${PROJECT_NAME}
++    PUBLIC _ENABLE_EXTENDED_ALIGNED_STORAGE)
++endif()
++
+ export(TARGETS ${PROJECT_NAME}
+   FILE "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-targets.cmake"
+ )
