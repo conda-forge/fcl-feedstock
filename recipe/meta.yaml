@@ -11,6 +11,7 @@ source:
   sha256: {{ sha256 }}
   patches:
     - win2017_support.patch
+    - 553.patch
 
 build:
   number: 0
