@@ -9,6 +9,8 @@ package:
 source:
   url: https://github.com/flexible-collision-library/fcl/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - win2017_support.patch
 
 build:
   number: 0
