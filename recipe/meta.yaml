@@ -28,13 +28,12 @@ requirements:
     - boost-cpp
     - flann
     - libode
-    - libccd
+    - libccd-double
     - eigen
     - octomap
   run:
     - boost-cpp
     - flann
-    - libccd
     - octomap
 
 test:
