@@ -64,6 +64,7 @@ about:
       detection, the contact information (including contact normals and
       contact points) can be returned optionally.
 
+
 extra:
   recipe-maintainers:
     - wolfv
