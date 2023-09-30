@@ -14,7 +14,7 @@ source:
     - 553.patch
 
 build:
-  number: 2
+  number: 3
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
@@ -25,14 +25,13 @@ requirements:
     - cmake
     - make  # [unix]
   host:
-    - boost-cpp
+    - libboost-devel
     - flann
     - libode
     - libccd-double
     - eigen
     - octomap
   run:
-    - boost-cpp
     - flann
     - octomap
 
