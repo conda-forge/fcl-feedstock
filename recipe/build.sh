@@ -14,6 +14,7 @@ cmake $SRC_DIR \
 	-B build \
 	-DBUILD_TESTING=ON \
 	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_INSTALL_LIBDIR=lib \
 	-DFCL_USE_X64_SSE=$USE_SSE
 
 cmake --build build --parallel
