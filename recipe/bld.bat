@@ -1,6 +1,7 @@
 mkdir build && cd build
 
 cmake -G "NMake Makefiles"^
+    -DFCL_STATIC_LIBRARY=OFF^
     -DCMAKE_BUILD_TYPE=Release^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX%^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX%^
