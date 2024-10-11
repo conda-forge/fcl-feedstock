@@ -1,6 +1,7 @@
 @echo on
 
 cmake %SRC_DIR% ^
+    -B build ^
     -DBUILD_TESTING=ON ^
     -DCMAKE_BUILD_TYPE=Release ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
