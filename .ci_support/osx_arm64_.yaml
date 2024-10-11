@@ -1,5 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '11.0'
+MACOSX_SDK_VERSION:
+- '11.0'
 c_compiler:
 - clang
 c_compiler_version:
@@ -14,11 +16,10 @@ cxx_compiler_version:
 - '16'
 flann:
 - 1.9.2
+libode:
+- 0.16.2
 macos_machine:
 - arm64-apple-darwin20.0.0
-pin_run_as_build:
-  flann:
-    max_pin: x.x.x
 target_platform:
 - osx-arm64
 zip_keys:
