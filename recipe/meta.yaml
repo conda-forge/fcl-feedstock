@@ -37,9 +37,12 @@ test:
   commands:
     - test -f $PREFIX/include/fcl/geometry/shape/cylinder.h  # [not win]
     - test -f $PREFIX/lib/pkgconfig/fcl.pc  # [not win]
+    - test -f $PREFIX/lib/cmake/fcl/fcl-config.cmake  # [not win]
     - test -f $PREFIX/lib/libfcl${SHLIB_EXT}  # [not win]
     - if not exist %PREFIX%\\Library\\include\\fcl\\geometry\\shape\\cylinder.h exit 1  # [win]
     - if not exist %PREFIX%\\Library\\lib\\pkgconfig\\fcl.pc exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\CMake\\fcl-config.cmake exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\lib\\fcl.lib exit 1  # [win]
 
 about:
   home: https://github.com/flexible-collision-library/fcl
