@@ -1,6 +1,7 @@
 @echo on
 
 cmake %SRC_DIR% ^
+    -G Ninja ^
     -B build ^
     -DBUILD_TESTING=ON ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
