@@ -8,11 +8,19 @@ else
 	USE_SSE="ON"
 fi
 
-cmake ${CMAKE_ARGS} -DCMAKE_INSTALL_PREFIX=$PREFIX \
-	  -DCMAKE_BUILD_TYPE=Release \
-	  -DCMAKE_INSTALL_LIBDIR=lib \
-	  -DFCL_USE_X64_SSE=$USE_SSE \
-      $SRC_DIR
+cmake $SRC_DIR \
+	${CMAKE_ARGS} \
+	-G Ninja \
+	-B build \
+	-DBUILD_TESTING=ON \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_INSTALL_LIBDIR=lib \
+	-DFCL_USE_X64_SSE=$USE_SSE
 
-make -j${CPU_COUNT}
-make install
+cmake --build build --parallel
+
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
+	ctest --test-dir build --output-on-failure
+fi
+
+cmake --build build --parallel --target install
