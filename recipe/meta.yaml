@@ -23,7 +23,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
     - cmake
-    - ninja  # [unix]
+    - ninja
   host:
     - flann
     - libode
