@@ -4,6 +4,7 @@ cmake %SRC_DIR% ^
     -G Ninja ^
     -B build ^
     -DBUILD_TESTING=ON ^
+    -DCMAKE_BUILD_TYPE=Release^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
     -DCMAKE_INSTALL_LIBDIR=lib ^
