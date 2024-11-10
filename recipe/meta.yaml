@@ -13,7 +13,7 @@ source:
     - 553.patch
 
 build:
-  number: 5
+  number: 6
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
@@ -26,7 +26,6 @@ requirements:
     - ninja
   host:
     - flann
-    - libode
     - libccd-double
     - eigen
     - octomap
