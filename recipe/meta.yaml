@@ -26,7 +26,6 @@ requirements:
     - ninja
   host:
     - flann
-    - libode
     - libccd-double
     - eigen
     - octomap
