@@ -19,7 +19,7 @@ cmake $SRC_DIR \
 
 cmake --build build --parallel
 
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
 	ctest --test-dir build --output-on-failure
 fi
 
