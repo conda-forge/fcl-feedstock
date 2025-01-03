@@ -1,13 +1,11 @@
 @echo on
 
 cmake %SRC_DIR% ^
+    %CMAKE_ARGS% ^
     -G Ninja ^
     -B build ^
     -DBUILD_TESTING=ON ^
     -DCMAKE_BUILD_TYPE=Release^
-    -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
-    -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
-    -DCMAKE_INSTALL_LIBDIR=lib ^
     -DFCL_STATIC_LIBRARY=ON
 
 if errorlevel 1 exit 1
