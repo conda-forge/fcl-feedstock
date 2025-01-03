@@ -5,8 +5,8 @@ cmake %SRC_DIR% ^
     -G Ninja ^
     -B build ^
     -DBUILD_TESTING=ON ^
-    -DCMAKE_BUILD_TYPE=Release^
-    -DFCL_STATIC_LIBRARY=ON
+    -DCMAKE_BUILD_TYPE=Release ^
+    -DFCL_STATIC_LIBRARY=OFF
 
 if errorlevel 1 exit 1
 
