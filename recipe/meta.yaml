@@ -11,9 +11,10 @@ source:
   sha256: {{ sha256 }}
   patches:
     - 553.patch
+    - enable-shared-libs.patch  # [win]
 
 build:
-  number: 6
+  number: 7
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
@@ -41,7 +42,7 @@ test:
     - if not exist %PREFIX%\\Library\\include\\fcl\\geometry\\shape\\cylinder.h exit 1  # [win]
     - if not exist %PREFIX%\\Library\\lib\\pkgconfig\\fcl.pc exit 1  # [win]
     - if not exist %PREFIX%\\Library\\CMake\\fcl-config.cmake exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\lib\\fcl.lib exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\bin\\fcl.dll exit 1  # [win]
 
 about:
   home: https://github.com/flexible-collision-library/fcl
