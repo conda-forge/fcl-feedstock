@@ -14,7 +14,7 @@ source:
     - enable-shared-libs.patch  # [win]
 
 build:
-  number: 7
+  number: 8
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
