@@ -39,6 +39,7 @@ requirements:
     - libccd-double
     - octomap
   run:
+    - eigen <5
     - flann
   run_exports:
     - ${{ pin_subpackage("fcl", upper_bound="x.x") }}
