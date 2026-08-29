@@ -13,8 +13,9 @@ source:
   sha256: 90409e940b24045987506a6b239424a4222e2daf648c86dd146cbcb692ebdcbc
   patches:
     - 553.patch
-    # Backport upstream PR 645 for Eigen 5 compatibility.
-    # Remove after a release containing commit 1257b4183e0ae4890294b0edea780605c2533cfd.
+    # Backport upstream PRs 620 and 645 for Eigen 5 compatibility.
+    # Remove after a release containing commits a3fbc9f and 1257b41.
+    - 620.patch
     - 645.patch
     - if: win
       then: enable-shared-libs.patch
