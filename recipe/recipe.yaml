@@ -1,51 +1,67 @@
-{% set name = "fcl" %}
-{% set version = "0.7.0" %}
-{% set sha256 = "90409e940b24045987506a6b239424a4222e2daf648c86dd146cbcb692ebdcbc" %}
+schema_version: 1
+
+context:
+  name: fcl
+  version: "0.7.0"
 
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: ${{ name }}
+  version: ${{ version }}
 
 source:
-  url: https://github.com/flexible-collision-library/fcl/archive/{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: https://github.com/flexible-collision-library/fcl/archive/${{ version }}.tar.gz
+  sha256: 90409e940b24045987506a6b239424a4222e2daf648c86dd146cbcb692ebdcbc
   patches:
     - 553.patch
-    - enable-shared-libs.patch  # [win]
+    - if: win
+      then: enable-shared-libs.patch
 
 build:
-  number: 8
-  run_exports:
-    - {{ pin_subpackage(name, max_pin='x.x') }}
+  number: 9
+  script:
+    - if: unix
+      then: bash "${RECIPE_DIR}/build.sh"
+    - if: win
+      then: call "%RECIPE_DIR%\\build.bat"
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ stdlib('c') }}
+    - ${{ compiler("c") }}
+    - ${{ compiler("cxx") }}
+    - ${{ stdlib("c") }}
     - cmake
     - ninja
   host:
+    - eigen
     - flann
     - libccd-double
-    - eigen
     - octomap
   run:
     - flann
+  run_exports:
+    - ${{ pin_subpackage("fcl", upper_bound="x.x") }}
 
-test:
-  commands:
-    - test -f $PREFIX/include/fcl/geometry/shape/cylinder.h  # [not win]
-    - test -f $PREFIX/lib/pkgconfig/fcl.pc  # [not win]
-    - test -f $PREFIX/lib/cmake/fcl/fcl-config.cmake  # [not win]
-    - test -f $PREFIX/lib/libfcl${SHLIB_EXT}  # [not win]
-    - if not exist %PREFIX%\\Library\\include\\fcl\\geometry\\shape\\cylinder.h exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\lib\\pkgconfig\\fcl.pc exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\CMake\\fcl-config.cmake exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\bin\\fcl.dll exit 1  # [win]
+tests:
+  - files:
+      recipe:
+        - tests/
+    requirements:
+      run:
+        - ${{ compiler("cxx") }}
+        - ${{ stdlib("c") }}
+        - cmake
+        - ninja
+        - pkg-config
+    script:
+      - pkg-config --modversion fcl
+      - pkg-config --libs fcl
+      - cmake -S tests -B tests/build -G Ninja -DCMAKE_BUILD_TYPE=Release
+      - cmake --build tests/build --config Release
+      - ctest --test-dir tests/build --output-on-failure --build-config Release
 
 about:
-  home: https://github.com/flexible-collision-library/fcl
+  homepage: https://github.com/flexible-collision-library/fcl
+  repository: https://github.com/flexible-collision-library/fcl
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
@@ -67,7 +83,8 @@ about:
       contact points) can be returned optionally.
 
 extra:
+  feedstock-name: fcl
   recipe-maintainers:
     - jeongseok-meta
-    - wolfv
     - traversaro
+    - wolfv
