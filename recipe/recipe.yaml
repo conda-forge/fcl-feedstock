@@ -35,12 +35,10 @@ requirements:
     # FCL 0.7 hardcodes C++11, while Eigen 5 requires C++14.
     # Remove this upper bound after upstream PR 645 is included in a release.
     - eigen <5
-    - flann
     - libccd-double
     - octomap
   run:
     - eigen <5
-    - flann
   run_exports:
     - ${{ pin_subpackage("fcl", upper_bound="x.x") }}
 
