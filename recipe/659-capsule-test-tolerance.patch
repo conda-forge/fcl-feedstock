@@ -1,0 +1,14 @@
+diff --git a/test/test_fcl_capsule_capsule.cpp b/test/test_fcl_capsule_capsule.cpp
+index 085a710..f5eef5e 100644
+--- a/test/test_fcl_capsule_capsule.cpp
++++ b/test/test_fcl_capsule_capsule.cpp
+@@ -604,7 +604,8 @@ class CapsuleCapsuleSegmentTest : public ::testing::Test {
+ 
+     detail::capsuleCapsuleDistance(this->c1_, this->X_FC1_, this->c2_,
+                                    this->X_FC2_, &distance, &p_FW1, &p_FW2);
+-    const auto eps = constants<S>::eps_78();
++    // Slightly looser tolerance to accommodate multiple platforms.
++    const auto eps = constants<S>::eps_34();
+     using std::abs;
+     S error = abs(distance - this->expected_distance_);
+     if (error > eps) {

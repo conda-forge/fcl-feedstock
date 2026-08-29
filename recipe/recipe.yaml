@@ -1,0 +1,92 @@
+schema_version: 1
+
+context:
+  name: fcl
+  version: "0.7.0"
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/flexible-collision-library/fcl/archive/${{ version }}.tar.gz
+  sha256: 90409e940b24045987506a6b239424a4222e2daf648c86dd146cbcb692ebdcbc
+  patches:
+    - 553.patch
+    # Backport upstream PRs 620 and 645 for Eigen 5 compatibility.
+    # Remove after a release containing commits a3fbc9f and 1257b41.
+    - 620.patch
+    - 645.patch
+    # Backport the cross-platform capsule test tolerance from upstream PR 659.
+    - 659-capsule-test-tolerance.patch
+    - if: win
+      then: enable-shared-libs.patch
+
+build:
+  number: 9
+  script: build
+
+requirements:
+  build:
+    - ${{ compiler("c") }}
+    - ${{ compiler("cxx") }}
+    - ${{ stdlib("c") }}
+    - cmake
+    - ninja
+  host:
+    - eigen
+    - eigen-abi-devel
+    - libccd-double
+    - octomap
+  run:
+    - eigen
+  run_exports:
+    - ${{ pin_subpackage("fcl", upper_bound="x.x") }}
+
+tests:
+  - files:
+      recipe:
+        - tests/
+    requirements:
+      run:
+        - ${{ compiler("cxx") }}
+        - ${{ stdlib("c") }}
+        - cmake
+        - ninja
+        - pkg-config
+    script:
+      - pkg-config --modversion fcl
+      - pkg-config --libs fcl
+      - cmake -S tests -B tests/build -G Ninja -DCMAKE_BUILD_TYPE=Release
+      - cmake --build tests/build --config Release
+      - ctest --test-dir tests/build --output-on-failure --build-config Release
+
+about:
+  homepage: https://github.com/flexible-collision-library/fcl
+  repository: https://github.com/flexible-collision-library/fcl
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: The flexible collision library (FCL) is a library for performing proximity queries.
+  description: |
+    FCL is a library for performing three types of proximity queries on a pair of geometric models composed of triangles.
+
+    - Collision detection: detecting whether the two models overlap, and
+      optionally, all of the triangles that overlap.
+    - Distance computation: computing the minimum distance between a pair of
+      models, i.e., the distance between the closest pair of points.
+    - Tolerance verification: determining whether two models are closer or
+      farther than a tolerance distance.
+    - Continuous collision detection: detecting whether the two moving
+      models overlap during the movement, and optionally, the time of
+      contact.
+    - Contact information: for collision detection and continuous collision
+      detection, the contact information (including contact normals and
+      contact points) can be returned optionally.
+
+extra:
+  feedstock-name: fcl
+  recipe-maintainers:
+    - jeongseok-meta
+    - traversaro
+    - wolfv
