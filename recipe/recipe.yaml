@@ -13,6 +13,9 @@ source:
   sha256: 90409e940b24045987506a6b239424a4222e2daf648c86dd146cbcb692ebdcbc
   patches:
     - 553.patch
+    # Backport upstream PR 645 for Eigen 5 compatibility.
+    # Remove after a release containing commit 1257b4183e0ae4890294b0edea780605c2533cfd.
+    - 645.patch
     - if: win
       then: enable-shared-libs.patch
 
@@ -32,13 +35,11 @@ requirements:
     - cmake
     - ninja
   host:
-    # FCL 0.7 hardcodes C++11, while Eigen 5 requires C++14.
-    # Remove this upper bound after upstream PR 645 is included in a release.
-    - eigen <5
+    - eigen
     - libccd-double
     - octomap
   run:
-    - eigen <5
+    - eigen
   run_exports:
     - ${{ pin_subpackage("fcl", upper_bound="x.x") }}
 
