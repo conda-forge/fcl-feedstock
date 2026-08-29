@@ -17,6 +17,8 @@ source:
     # Remove after a release containing commits a3fbc9f and 1257b41.
     - 620.patch
     - 645.patch
+    # Backport the cross-platform capsule test tolerance from upstream PR 659.
+    - 659-capsule-test-tolerance.patch
     - if: win
       then: enable-shared-libs.patch
 
