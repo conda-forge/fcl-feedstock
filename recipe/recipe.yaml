@@ -24,11 +24,7 @@ source:
 
 build:
   number: 9
-  script:
-    - if: unix
-      then: bash "${RECIPE_DIR}/build.sh"
-    - if: win
-      then: call "%RECIPE_DIR%\\build.bat"
+  script: build
 
 requirements:
   build:
@@ -39,6 +35,7 @@ requirements:
     - ninja
   host:
     - eigen
+    - eigen-abi-devel
     - libccd-double
     - octomap
   run:
